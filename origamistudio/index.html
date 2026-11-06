@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ORIGAMISTUDIO™ — Museum-Grade Computational Origami & Paper Engineering</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Fredoka:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Quicksand:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+      (function() {
+        try {
+          var t = localStorage.getItem('origami_theme') || 'light';
+          document.documentElement.setAttribute('data-theme', t);
+          if (t === 'dark') {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        } catch(e) {}
+      })();
+    </script>
+  </head>
+  <body class="bg-[var(--bg-canvas,#faf8f5)] text-[var(--text-primary,#1c1917)] antialiased selection:bg-[#ff6b35]/25 selection:text-[#ff6b35] overflow-x-hidden transition-colors duration-200">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

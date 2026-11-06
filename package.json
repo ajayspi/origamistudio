@@ -1,0 +1,15 @@
+{
+  "name": "project-o2",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Project O2 — Computational Origami & Compliant 3D Kinematics Studio",
+  "license": "MIT",
+  "scripts": {
+    "dev": "pnpm --filter origamistudio dev",
+    "build": "pnpm --filter origamistudio build",
+    "test": "pnpm --filter origamistudio test",
+    "verify:kits": "pnpm --filter origamistudio verify:kits",
+    "lint": "pnpm --filter origamistudio lint",
+    "preview": "pnpm --filter origamistudio preview"
+  }
+}

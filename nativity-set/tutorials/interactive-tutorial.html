@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Guided Tutorial | 3D Origami Nativity</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../web/css/main.css">
+    <style>
+        .tutorial-page {
+            min-height: 100vh;
+            background: radial-gradient(ellipse at top, #151520 0%, var(--bg-primary) 50%);
+            padding: 2rem 0 4rem;
+        }
+        
+        .tutorial-header {
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .back-link:hover {
+            color: white;
+        }
+        
+        .kit-selector {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            background: var(--bg-card);
+            padding: 0.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+        
+        .kit-btn {
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            transition: all 0.3s;
+            font-size: 0.875rem;
+        }
+        
+        .kit-btn.active {
+            background: var(--gradient-1);
+            color: white;
+        }
+        
+        .kit-btn:hover:not(.active) {
+            background: var(--bg-card-hover);
+            color: white;
+        }
+        
+        .main-layout {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+        
+        .steps-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 2rem;
+            max-height: calc(100vh - 4rem);
+            overflow-y: auto;
+        }
+        
+        .steps-panel::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .steps-panel::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        
+        .steps-panel::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+        
+        .kit-info {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .kit-number-badge {
+            display: inline-flex;
+            width: 40px;
+            height: 40px;
+            align-items: center;
+            justify-content: center;
+            background: var(--gradient-1);
+            border-radius: 10px;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .kit-info h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .kit-info .subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .kit-meta {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.875rem;
+            color: var(--text-tertiary);
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient-1);
+            transition: width 0.4s ease;
+            width: 0%;
+        }
+        
+        .steps-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .step-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .step-item:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--border-hover);
+        }
+        
+        .step-item.active {
+            background: rgba(245, 158, 11, 0.1);
+            border-color: var(--accent-gold);
+        }
+        
+        .step-item.completed {
+            opacity: 0.7;
+        }
+        
+        .step-checkbox {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.3s;
+        }
+        
+        .step-item.completed .step-checkbox {
+            background: var(--accent-gold);
+            border-color: var(--accent-gold);
+        }
+        
+        .step-item.active .step-checkbox {
+            border-color: var(--accent-gold);
+        }
+        
+        .check-icon {
+            display: none;
+            color: white;
+        }
+        
+        .step-item.completed .check-icon {
+            display: block;
+        }
+        
+        .step-info {
+            flex: 1;
+        }
+        
+        .step-number {
+            font-weight: 600;
+            font-size: 0.875rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .step-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        .step-time {
+            font-size: 0.75rem;
+            color: var(--text-tertiary);
+        }
+        
+        .viewer-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .viewer-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+        
+        .viewer-header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .viewer-title-group h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .viewer-title-group p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .step-counter {
+            padding: 0.5rem 1rem;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        .viewer-3d {
+            height: 400px;
+            background: radial-gradient(ellipse at center, rgba(245, 158, 11, 0.1) 0%, transparent 70%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .origami-3d {
+            width: 200px;
+            height: 200px;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotate3d 20s linear infinite;
+        }
+        
+        @keyframes rotate3d {
+            from { transform: rotateY(0deg) rotateX(10deg); }
+            to { transform: rotateY(360deg) rotateX(10deg); }
+        }
+        
+        .paper-layer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.8) 0%, rgba(220, 38, 38, 0.6) 100%);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transform-origin: center;
+        }
+        
+        .paper-layer:nth-child(1) { transform: translateZ(0px) rotateZ(0deg); }
+        .paper-layer:nth-child(2) { transform: translateZ(10px) rotateZ(45deg); }
+        .paper-layer:nth-child(3) { transform: translateZ(20px) rotateZ(90deg); }
+        .paper-layer:nth-child(4) { transform: translateZ(30px) rotateZ(135deg); }
+        
+        .instruction-card {
+            padding: 2rem;
+        }
+        
+        .instruction-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .instruction-text {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+        
+        .tip-box {
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .tip-box-icon {
+            color: var(--accent-gold);
+            flex-shrink: 0;
+        }
+        
+        .tip-box-content {
+            flex: 1;
+        }
+        
+        .tip-box-content strong {
+            color: var(--accent-gold);
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+        
+        .tip-box-content p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn-step {
+            flex: 1;
+            padding: 0.875rem 1.5rem;
+            border-radius: 12px;
+            border: none;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-complete {
+            background: var(--gradient-1);
+            color: white;
+        }
+        
+        .btn-complete:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(245, 158, 11, 0.3);
+        }
+        
+        .btn-next {
+            background: var(--bg-secondary);
+            color: white;
+            border: 1px solid var(--border);
+        }
+        
+        .btn-next:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--border-hover);
+        }
+        
+        .btn-next:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        
+        .btn-step:active {
+            transform: scale(0.98);
+        }
+        
+        @media (max-width: 968px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+            .steps-panel {
+                position: static;
+                max-height: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="tutorial-page">
+        <header class="tutorial-header">
+            <a href="../web/index.html" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M15.8333 10H4.16666M10 15.8333L4.16666 10L10 4.16667" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>Back to Overview</span>
+            </a>
+            <div class="kit-selector" id="kitSelector"></div>
+        </header>
+        
+        <div class="main-layout">
+            <aside class="steps-panel">
+                <div class="kit-info">
+                    <div class="kit-number-badge" id="kitBadge">1</div>
+                    <h1 id="kitTitle">Loading...</h1>
+                    <p class="subtitle" id="kitSubtitle"></p>
+                    <div class="kit-meta">
+                        <span>⏱️ <span id="kitTime"></span></span>
+                        <span>📊 <span id="kitDifficulty"></span></span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <p style="margin-top: 0.75rem; font-size: 0.875rem; color: var(--text-tertiary);">
+                        <span id="completedCount">0</span> / <span id="totalSteps">0</span> steps completed
+                    </p>
+                </div>
+                <div class="steps-list" id="stepsList"></div>
+            </aside>
+            
+            <main class="viewer-panel">
+                <div class="viewer-card">
+                    <div class="viewer-header">
+                        <div class="viewer-title-group">
+                            <h2 id="currentStepTitle">Step 1</h2>
+                            <p id="currentStepSubtitle"></p>
+                        </div>
+                        <div class="step-counter">
+                            Step <span id="currentStepNum">1</span> of <span id="currentStepTotal">6</span>
+                        </div>
+                    </div>
+                    <div class="viewer-3d">
+                        <div class="origami-3d" id="origami3d">
+                            <div class="paper-layer"></div>
+                            <div class="paper-layer"></div>
+                            <div class="paper-layer"></div>
+                            <div class="paper-layer"></div>
+                        </div>
+                    </div>
+                    <div class="instruction-card">
+                        <h3>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                                <path d="M12 16v-4M12 8h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                            Instructions
+                        </h3>
+                        <p class="instruction-text" id="instructionText"></p>
+                        <div class="tip-box">
+                            <div class="tip-box-icon">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M10 1.66666L12.575 6.88333L18.3333 7.72499L14.1667 11.7833L15.15 17.5167L10 14.8083L4.85 17.5167L5.83333 11.7833L1.66666 7.72499L7.425 6.88333L10 1.66666Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <div class="tip-box-content">
+                                <strong>Pro Tip</strong>
+                                <p id="tipText"></p>
+                            </div>
+                        </div>
+                        <div class="action-buttons">
+                            <button class="btn-step btn-complete" id="btnComplete">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M16.6667 5L7.5 14.1667L3.33334 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <span>Mark Step Complete</span>
+                            </button>
+                            <button class="btn-step btn-next" id="btnNext">
+                                <span>Next Step</span>
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M4.16666 10H15.8333M10 4.16667L15.8333 10L10 15.8333" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="js/tutorial-engine.js"></script>
+</body>
+</html>

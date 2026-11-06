@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Origami Studio | ORIGAMISTUDIO</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Clash+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/hub.css">
+    <style>
+        body {
+            padding-top: 75px;
+            background: #05050c;
+            color: #ffffff;
+            min-height: 100vh;
+        }
+
+        .studio-page {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem 3rem;
+        }
+
+        /* Top Header */
+        .studio-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1rem;
+        }
+
+        .header-nav-left {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .back-link {
+            color: var(--text-sub);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--text);
+        }
+
+        .kit-header-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .kit-badge-pill {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            color: var(--accent);
+            padding: 0.3rem 0.7rem;
+            background: rgba(255, 107, 53, 0.1);
+            border: 1px solid var(--accent);
+            border-radius: 4px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .btn-header {
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+            border-radius: 6px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .btn-print-guide {
+            background: rgba(255, 255, 255, 0.05);
+            color: #ffffff;
+            border: 1px solid var(--border-2);
+        }
+
+        .btn-print-guide:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--cyan);
+            color: var(--cyan);
+        }
+
+        /* Progress Bar */
+        .progress-bar-container {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--accent), var(--cyan));
+            transition: width 0.4s ease;
+        }
+
+        /* 2-Column Grid Layout */
+        .studio-layout {
+            display: grid;
+            grid-template-columns: 420px 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        /* Left Steps Sidebar */
+        .sidebar-panel {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            position: sticky;
+            top: 90px;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .kit-title-group h2 {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 1.6rem;
+            margin-bottom: 0.35rem;
+            letter-spacing: 0.02em;
+        }
+
+        .kit-meta-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+        }
+
+        .tag-item {
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            color: var(--text-sub);
+        }
+
+        .goal-card {
+            background: rgba(255, 107, 53, 0.06);
+            border-left: 3px solid var(--accent);
+            padding: 0.75rem 1rem;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.825rem;
+            color: var(--text-sub);
+            line-height: 1.5;
+        }
+
+        .steps-nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-tert);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+
+        .steps-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            padding: 0.75rem 1rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+
+        .step-item:hover {
+            background: var(--surface-2);
+            border-color: var(--border-2);
+            transform: translateX(3px);
+        }
+
+        .step-item.active {
+            background: rgba(255, 107, 53, 0.12);
+            border-color: var(--accent);
+            box-shadow: 0 0 15px rgba(255, 107, 53, 0.15);
+        }
+
+        .step-item.completed {
+            border-color: rgba(16, 185, 129, 0.4);
+        }
+
+        .step-check-indicator {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            border: 1.5px solid var(--border-2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--text-tert);
+            transition: all 0.2s;
+        }
+
+        .step-item.active .step-check-indicator {
+            border-color: var(--accent);
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .step-item.completed .step-check-indicator {
+            background: #10b981;
+            border-color: #10b981;
+            color: white;
+        }
+
+        .step-info-col {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .step-title-text {
+            font-size: 0.875rem;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .step-sub-text {
+            font-size: 0.75rem;
+            color: var(--text-tert);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.15rem;
+        }
+
+        .keyboard-hint {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--text-tert);
+            text-align: center;
+            padding-top: 0.5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        /* Right Viewer Panel */
+        .viewer-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        /* Mode Switcher Tabs */
+        .viewer-header-tabs {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 0.5rem 1rem;
+        }
+
+        .tab-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--text-sub);
+            padding: 0.4rem 0.85rem;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tab-btn:hover {
+            color: #ffffff;
+            background: var(--surface-2);
+        }
+
+        .tab-btn.active {
+            background: rgba(0, 240, 255, 0.1);
+            color: var(--cyan);
+            border-color: rgba(0, 240, 255, 0.3);
+        }
+
+        .viewer-controls-top {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-sub);
+        }
+
+        /* 3D Stage Area */
+        .viewer-stage {
+            background: radial-gradient(ellipse at 50% 36%, rgba(26, 38, 64, 0.75) 0%, rgba(12, 16, 28, 0.9) 55%, #05060b 100%);
+            border: 1px solid var(--border-2);
+            border-radius: 14px;
+            height: 520px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        #threeCanvasContainer {
+            width: 100%;
+            height: 100%;
+            cursor: grab;
+        }
+
+        #threeCanvasContainer:active {
+            cursor: grabbing;
+        }
+
+        /* Top Right Studio Toolbar */
+        .stage-toolbar-top-right {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            background: rgba(10, 12, 22, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            padding: 0.3rem;
+            border-radius: 8px;
+            z-index: 10;
+        }
+
+        .stage-tool-btn {
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--text-sub);
+            padding: 0.25rem 0.6rem;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .stage-tool-btn:hover {
+            color: #ffffff;
+            background: var(--surface-2);
+            border-color: var(--border-2);
+        }
+
+        .stage-tool-btn.active {
+            background: rgba(0, 240, 255, 0.15);
+            color: var(--cyan);
+            border-color: rgba(0, 240, 255, 0.4);
+        }
+
+        /* Plan View Kinematics HUD */
+        .stage-kinematics-hud {
+            position: absolute;
+            bottom: 2.2rem;
+            left: 1rem;
+            background: rgba(10, 14, 26, 0.88);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(0, 240, 255, 0.25);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+            border-radius: 10px;
+            padding: 0.65rem 0.85rem;
+            z-index: 10;
+            pointer-events: none;
+            max-width: 380px;
+            font-family: 'JetBrains Mono', monospace;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+        .stage-kinematics-hud.hidden {
+            display: none;
+        }
+        .hud-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            margin-bottom: 0.45rem;
+        }
+        .hud-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #00f0ff;
+            box-shadow: 0 0 8px #00f0ff;
+        }
+        .hud-title {
+            font-size: 0.68rem;
+            font-weight: 700;
+            color: #00f0ff;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+        .hud-badge {
+            font-size: 0.6rem;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            color: #34d399;
+            font-weight: 600;
+        }
+        .hud-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.4rem 0.8rem;
+        }
+        .hud-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+        }
+        .hud-label {
+            font-size: 0.58rem;
+            color: var(--text-tert);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .hud-val {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: #f1f5f9;
+        }
+        .hud-val.highlight {
+            color: #38bdf8;
+            font-weight: 700;
+        }
+
+        /* Alternate View: CP Mode */
+        #cpViewContainer {
+            display: none;
+            width: 100%;
+            height: 100%;
+            padding: 2rem;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .cp-view-svg {
+            max-width: 380px;
+            max-height: 380px;
+            width: 100%;
+            height: 100%;
+            border: 1px solid var(--border-2);
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+        }
+
+        /* 3D Stage Floating Overlays */
+        .stage-overlay-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: rgba(10, 12, 22, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-2);
+            padding: 0.35rem 0.85rem;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--cyan);
+            pointer-events: none;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .stage-hint {
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--text-tert);
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            pointer-events: none;
+            border: 1px solid var(--border);
+        }
+
+        /* Kinematics Fold Slider Controls - Dedicated Dock Below Stage */
+        .fold-slider-container {
+            background: rgba(10, 12, 22, 0.85);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border-2);
+            padding: 0.85rem 1.5rem;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
+        }
+
+        .slider-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-sub);
+            white-space: nowrap;
+        }
+
+        .fold-range {
+            flex: 1;
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.15);
+            outline: none;
+            -webkit-appearance: none;
+            cursor: pointer;
+        }
+
+        .fold-range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--cyan);
+            cursor: pointer;
+            box-shadow: 0 0 10px var(--cyan);
+        }
+
+        .btn-reset-cam {
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            color: var(--text-sub);
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-reset-cam:hover {
+            color: #ffffff;
+            border-color: var(--border-2);
+        }
+
+        /* Instruction Card */
+        .instruction-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.75rem;
+        }
+
+        .step-heading-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .step-heading-title {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 600;
+        }
+
+        .fold-tag {
+            background: rgba(168, 85, 247, 0.15);
+            color: var(--purple);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+        }
+
+        /* School Age-Track Learning Switcher */
+        .age-track-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            padding: 0.6rem 0.85rem;
+            border-radius: 10px;
+            margin-bottom: 1.25rem;
+            flex-wrap: wrap;
+        }
+
+        .age-track-pills {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 0.25rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .age-track-btn {
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--text-tert);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            padding: 0.35rem 0.75rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 600;
+        }
+
+        .age-track-btn:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .age-track-btn.active[data-track="junior"] {
+            background: linear-gradient(90deg, #f59e0b, #ff6b35);
+            color: #ffffff;
+            box-shadow: 0 2px 10px rgba(245, 158, 11, 0.3);
+        }
+
+        .age-track-btn.active[data-track="explorer"] {
+            background: linear-gradient(90deg, #00f0ff, #3b82f6);
+            color: #05060b;
+            font-weight: 700;
+            box-shadow: 0 2px 10px rgba(0, 240, 255, 0.3);
+        }
+
+        .age-track-btn.active[data-track="stem"] {
+            background: linear-gradient(90deg, #a855f7, #6366f1);
+            color: #ffffff;
+            box-shadow: 0 2px 10px rgba(168, 85, 247, 0.3);
+        }
+
+        .btn-read-aloud {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border-2);
+            color: var(--text-main);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.4rem 0.85rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-read-aloud:hover {
+            background: rgba(0, 240, 255, 0.15);
+            border-color: var(--cyan);
+            color: var(--cyan);
+        }
+
+        .btn-read-aloud.speaking {
+            background: rgba(245, 158, 11, 0.25);
+            border-color: #f59e0b;
+            color: #f59e0b;
+        }
+
+        .junior-metaphor-box {
+            background: linear-gradient(90deg, rgba(245, 158, 11, 0.15), rgba(255, 107, 53, 0.15));
+            border: 1px solid rgba(245, 158, 11, 0.35);
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.85rem;
+        }
+
+        .stem-theorem-box {
+            background: rgba(168, 85, 247, 0.1);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            border-radius: 10px;
+            padding: 0.85rem 1.1rem;
+            margin-bottom: 1.25rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+        }
+
+        /* Classroom Smartboard Fullscreen Mode */
+        body.smartboard-mode .studio-header {
+            display: none;
+        }
+        body.smartboard-mode .sidebar-panel {
+            display: none;
+        }
+        body.smartboard-mode .studio-layout {
+            grid-template-columns: 1fr;
+        }
+        body.smartboard-mode .viewer-stage {
+            height: calc(100vh - 280px);
+            min-height: 520px;
+        }
+
+        .instruction-body-text {
+            color: var(--text-sub);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 1.25rem;
+        }
+
+        .pro-tip-box {
+            background: rgba(255, 107, 53, 0.08);
+            border: 1px solid rgba(255, 107, 53, 0.25);
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .pro-tip-icon {
+            color: var(--accent);
+            flex-shrink: 0;
+            margin-top: 0.15rem;
+        }
+
+        .pro-tip-content strong {
+            display: block;
+            color: var(--accent);
+            font-size: 0.8rem;
+            font-family: 'JetBrains Mono', monospace;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.25rem;
+        }
+
+        .pro-tip-content p {
+            color: var(--text-sub);
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+
+        /* Action Buttons Row */
+        .step-action-row {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-step {
+            padding: 0.85rem 1.5rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            border: 1px solid transparent;
+        }
+
+        .btn-prev {
+            background: var(--surface-2);
+            border-color: var(--border);
+            color: var(--text-sub);
+        }
+
+        .btn-prev:hover {
+            color: #ffffff;
+            border-color: var(--border-2);
+        }
+
+        .btn-prev:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .btn-complete {
+            flex: 1;
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.2);
+        }
+
+        .btn-complete:hover {
+            opacity: 0.92;
+            transform: translateY(-1px);
+        }
+
+        .btn-next {
+            background: var(--surface-2);
+            border-color: var(--border-2);
+            color: var(--cyan);
+        }
+
+        .btn-next:hover {
+            background: rgba(0, 240, 255, 0.1);
+            border-color: var(--cyan);
+        }
+
+        @media (max-width: 1024px) {
+            .studio-layout {
+                grid-template-columns: 1fr;
+            }
+            .sidebar-panel {
+                position: static;
+                max-height: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-inner">
+            <div class="nav-logo">
+                <span class="logo-bracket">[</span>ORIGAMI<span class="logo-dot">.</span>HF<span class="logo-bracket">]</span>
+            </div>
+            <div class="nav-links">
+                <a href="../index.html#collections" class="nav-link">COLLECTIONS</a>
+                <a href="../index.html#kits" class="nav-link">ALL KITS</a>
+                <a href="../image-to-origami.html" class="nav-link">IMAGE TO ORIGAMI</a>
+                <a href="../index.html#guides" class="nav-link">PRINT GUIDES</a>
+            </div>
+            <div class="nav-status">
+                <span class="status-dot"></span>
+                <span class="status-text">3D SIMULATOR ACTIVE</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="studio-page">
+        <header class="studio-header">
+            <div class="header-nav-left">
+                <a href="../index.html#kits" class="back-link">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                    Back to Hub
+                </a>
+                <div class="kit-header-info">
+                    <span class="kit-badge-pill" id="kitBadgePill">KIT 01</span>
+                    <span style="color: var(--text-tert); font-size: 0.85rem;" id="kitCollectionName">Collection</span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button id="btnSmartboardToggle" class="btn-header" style="background: rgba(168, 85, 247, 0.15); border: 1px solid rgba(168, 85, 247, 0.4); color: #d8b4fe;" onclick="toggleSmartboardMode()" title="Toggle Classroom Smartboard Presentation Mode">
+                    <span>📺 Smartboard</span>
+                </button>
+                <button id="btnSoundToggle" class="btn-header" style="background: rgba(255, 255, 255, 0.05); color: #ffffff; border: 1px solid var(--border-2);" onclick="toggleSound()">
+                    <span id="soundIcon">🔊</span> <span id="soundLabel">Sound ON</span>
+                </button>
+                <a href="#" id="printGuideLink" target="_blank" class="btn-header btn-print-guide">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                        <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                        <rect x="6" y="14" width="12" height="8"></rect>
+                    </svg>
+                    Print A4 Guide
+                </a>
+            </div>
+        </header>
+
+        <div class="progress-bar-container">
+            <div class="progress-bar-fill" id="progressBarFill"></div>
+        </div>
+
+        <div class="studio-layout">
+            <!-- Left Sidebar Navigation -->
+            <aside class="sidebar-panel">
+                <div class="kit-title-group">
+                    <h2 id="kitTitle">Loading Kit...</h2>
+                    <p style="color: var(--text-sub); font-size: 0.85rem;" id="kitSubtitle"></p>
+                    <div class="kit-meta-tags">
+                        <span class="tag-item" id="tagDifficulty">Intermediate</span>
+                        <span class="tag-item" id="tagTime">25-35 min</span>
+                        <span class="tag-item" id="tagPaper">6" x 6" Kami</span>
+                    </div>
+                </div>
+
+                <div class="goal-card" id="kitGoalCard">
+                    <strong>Objective:</strong> <span id="kitGoalText">Master the 3D folded form.</span>
+                </div>
+
+                <div class="steps-nav-header">
+                    <span>GUIDED STEPS</span>
+                    <span><span id="completedCount">0</span> / <span id="totalStepsCount">6</span> DONE</span>
+                </div>
+
+                <div class="steps-list" id="stepsList"></div>
+
+                <div class="keyboard-hint">
+                    Shortcuts: [← / →] Navigate Steps • [Space] Complete • [R] Reset 3D
+                </div>
+            </aside>
+
+            <!-- Right Interactive Viewer -->
+            <main class="viewer-container">
+                <div class="viewer-header-tabs">
+                    <div class="tab-buttons">
+                        <button class="tab-btn active" id="tab3D" onclick="switchViewerMode('3d')">3D PAPER SIMULATION</button>
+                        <button class="tab-btn" id="tabCP" onclick="switchViewerMode('cp')">CREASE PATTERN (CP)</button>
+                    </div>
+                    <div class="viewer-controls-top">
+                        <span id="stepCounterBadge">Step 1 of 6</span>
+                    </div>
+                </div>
+
+                <div class="viewer-stage">
+                    <div class="stage-overlay-badge" id="stageFoldBadge">PRELIMINARY BASE</div>
+
+                    <!-- Floating Studio Toolbar -->
+                    <div class="stage-toolbar-top-right">
+                        <button class="stage-tool-btn active" id="btnFoldHint" onclick="toggleFoldHints()" title="Toggle 3D Folding Guide Arrows & Beacons">🎯 Fold Hint</button>
+                        <button class="stage-tool-btn" id="btnEndModelToggle" onclick="toggleEndModelPreview()" style="color: #fbbf24; border-color: rgba(245, 158, 11, 0.4);" title="Inspect final completed 3D masterwork sculpture">🌟 End Model</button>
+                        <button class="stage-tool-btn" id="btnToggleLoop" onclick="toggleFoldLoop()" title="Toggle Continuous Animation Loop">🔁 Loop</button>
+                        <button class="stage-tool-btn" id="btnToggleKinematics" onclick="toggleKinematicsHUD()" title="Toggle Plan View Kinematics HUD">📏 Kinematics</button>
+                        <button class="stage-tool-btn active" id="btnAnglePerspective" onclick="setCameraAngle('perspective')" title="3D Perspective View">📐 3D</button>
+                        <button class="stage-tool-btn" id="btnAngleTop" onclick="setCameraAngle('top')" title="Top Plan View">🔝 Plan</button>
+                        <button class="stage-tool-btn" id="btnAngleFront" onclick="setCameraAngle('front')" title="Front Elevation View">🔲 Front</button>
+                        <button class="stage-tool-btn" id="btnLightingMood" onclick="cycleLightingMood()" title="Cycle Studio Lighting Mood">💡 Studio</button>
+                        <button class="stage-tool-btn" onclick="exportFoldFile()" title="Export MIT .FOLD v1.1 for Origami Simulator">📐 .FOLD</button>
+                        <button class="stage-tool-btn" onclick="exportObjFile()" title="Export 3D .OBJ Mesh for Blender">🧊 .OBJ</button>
+                        <button class="stage-tool-btn" onclick="exportCricutSvg()" title="Export Cricut & Laser Cutter Vector Guide">✂️ Cricut</button>
+                        <button class="stage-tool-btn" onclick="resetCamera()" title="Reset Camera View">🔄 Reset</button>
+                    </div>
+                    
+                    <!-- 3D Three.js Container -->
+                    <!-- Floating Architectural Plan View Kinematics HUD (Hidden by default to protect view) -->
+                    <div class="stage-kinematics-hud hidden" id="stageKinematicsHud">
+                        <div class="hud-header">
+                            <span class="hud-dot"></span>
+                            <span class="hud-title" id="hudTitle">PLAN VIEW KINEMATICS</span>
+                            <span class="hud-badge" id="hudKawasakiBadge">KAWASAKI: VALID</span>
+                        </div>
+                        <div class="hud-grid">
+                            <div class="hud-item">
+                                <span class="hud-label">DIHEDRAL ANGLE θ</span>
+                                <span class="hud-val highlight" id="hudAngleVal">180.0°</span>
+                            </div>
+                            <div class="hud-item">
+                                <span class="hud-label">FOLD AXIS VECTOR u</span>
+                                <span class="hud-val" id="hudVectorVal">&lang;0.71, 0.71, 0&rang;</span>
+                            </div>
+                            <div class="hud-item">
+                                <span class="hud-label">CREASE AXIS</span>
+                                <span class="hud-val" id="hudCreaseVal">[(-1.2, -1.2) &rarr; (1.2, 1.2)]</span>
+                            </div>
+                            <div class="hud-item">
+                                <span class="hud-label">TRAJECTORY</span>
+                                <span class="hud-val" id="hudTrajectoryVal">18 pts (Rodrigues)</span>
+                            </div>
+                            <div class="hud-item" style="grid-column: span 2;">
+                                <span class="hud-label">HUZITA-HATORI AXIOM</span>
+                                <span class="hud-val" id="hudAxiomVal" style="color: var(--cyan); font-size: 0.7rem;">AXIOM 2: Bisector</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="threeCanvasContainer"></div>
+
+                    <!-- Alternate 2D Crease Pattern View -->
+                    <div id="cpViewContainer">
+                        <div class="cp-view-svg" id="cpSvgTarget"></div>
+                        <p style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--text-tert);">
+                            Red: Mountain Folds (- · -) • Blue: Valley Folds (---)
+                        </p>
+                    </div>
+
+                    <div class="stage-hint">🖱️ Drag to Rotate • Scroll to Zoom</div>
+                </div>
+
+                <!-- Kinematics Fold Slider & Timeline Dock (Dedicated, zero model overlap) -->
+                <div class="fold-slider-container">
+                    <span class="slider-label">UNFOLD (0%)</span>
+                    <input type="range" min="0" max="100" value="100" class="fold-range" id="foldProgressSlider">
+                    <span class="slider-label" id="foldPercentDisplay">FOLD (100%)</span>
+                    <button class="btn-reset-cam" onclick="resetCamera()">RESET VIEW</button>
+                    <button class="stage-tool-btn" id="btnPlayFold" onclick="togglePlayFold()" title="Play / Pause Fold Animation" style="border: 1px solid var(--cyan); background: rgba(0, 240, 255, 0.15); color: var(--cyan); margin-left: 0.5rem; font-weight: bold;">▶ WATCH FOLD (SLOW)</button>
+                </div>
+
+                <!-- Instruction Card -->
+                <div class="instruction-card">
+                    <!-- School Age-Track Learning Switcher -->
+                    <div class="age-track-bar">
+                        <div style="display: flex; align-items: center; gap: 0.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--text-sub);">
+                            <span>🎓 LEARNING MODE:</span>
+                        </div>
+                        <div class="age-track-pills">
+                            <button id="btnAgeJunior" class="age-track-btn" data-track="junior" onclick="setAgeTrack('junior')">🐣 Junior (5-8)</button>
+                            <button id="btnAgeExplorer" class="age-track-btn active" data-track="explorer" onclick="setAgeTrack('explorer')">⭐ Explorer (9-13)</button>
+                            <button id="btnAgeStem" class="age-track-btn" data-track="stem" onclick="setAgeTrack('stem')">🔬 STEM (14-18)</button>
+                        </div>
+                    </div>
+
+                    <div class="step-heading-row">
+                        <div class="step-heading-title" id="currentStepHeading">Step 1: Base Rectangle</div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <button id="btnReadAloud" class="btn-read-aloud" onclick="toggleReadAloud()" title="Listen to step instructions spoken aloud">
+                                <span>🔊 Read to Me</span>
+                            </button>
+                            <span class="fold-tag" id="currentFoldType">Valley Fold</span>
+                        </div>
+                    </div>
+
+                    <!-- Junior Metaphor Box (Ages 5-8) -->
+                    <div id="juniorMetaphorBox" class="junior-metaphor-box" style="display: none;">
+                        <span style="font-size: 1.8rem;">🌮</span>
+                        <div>
+                            <strong style="color: #f59e0b; display: block; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; margin-bottom: 0.2rem;">KID-FRIENDLY FOLD METAPHOR</strong>
+                            <p id="juniorMetaphorText" style="color: #fef3c7; font-size: 0.95rem; margin: 0; font-weight: 500;"></p>
+                        </div>
+                    </div>
+
+                    <!-- STEM Theorem Box (Ages 14-18) -->
+                    <div id="stemTheoremBox" class="stem-theorem-box" style="display: none;">
+                        <div style="color: #c084fc; font-weight: bold; margin-bottom: 0.25rem;">📐 GEOMETRIC THEOREM & HUZITA AXIOM</div>
+                        <div id="stemTheoremText" style="color: var(--text-sub); line-height: 1.5;"></div>
+                    </div>
+
+                    <p class="instruction-body-text" id="currentInstructionText">
+                        Follow the folding sequence step by step.
+                    </p>
+
+                    <!-- Human "In Your Hands" 3-Step Action Guide -->
+                    <div style="background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 1rem; margin: 1rem 0; font-family: 'JetBrains Mono', monospace;">
+                        <div style="color: var(--cyan); font-size: 0.75rem; font-weight: bold; text-transform: uppercase; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.4rem;">
+                            <span>🖐 HOW TO FOLD IN YOUR HANDS</span>
+                        </div>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.75rem; font-size: 0.75rem;">
+                            <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); padding: 0.6rem; border-radius: 8px;">
+                                <strong style="color: var(--cyan); display: block; margin-bottom: 0.2rem;">1. LOCATE POINTS</strong>
+                                Find corner <span style="color: var(--cyan);">❶ Lift Here</span> and match onto target <span style="color: var(--amber);">❷ Bring Here</span>.
+                            </div>
+                            <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); padding: 0.6rem; border-radius: 8px;">
+                                <strong style="color: var(--amber); display: block; margin-bottom: 0.2rem;">2. GENTLY FOLD</strong>
+                                Lift corner ❶ along golden motion arrow and align it squarely onto target ❷.
+                            </div>
+                            <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); padding: 0.6rem; border-radius: 8px;">
+                                <strong style="color: #34d399; display: block; margin-bottom: 0.2rem;">3. PRESS CREASE</strong>
+                                Slide your thumbnail or bone folder firmly along the glowing fold line.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pro-tip-box">
+                        <svg class="pro-tip-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 18h6"></path>
+                            <path d="M10 22h4"></path>
+                            <path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7z"></path>
+                        </svg>
+                        <div class="pro-tip-content">
+                            <strong>MASTER PRO-TIP</strong>
+                            <p id="currentTipText">Keep creases razor-sharp with bone folder.</p>
+                        </div>
+                    </div>
+
+                    <div class="step-action-row">
+                        <button class="btn-step btn-prev" id="btnPrev" onclick="navigateStep(-1)">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="19" y1="12" x2="5" y2="12"></line>
+                                <polyline points="12 19 5 12 12 5"></polyline>
+                            </svg>
+                            Previous Step
+                        </button>
+                        <button class="btn-step btn-complete" id="btnComplete" onclick="toggleCurrentStepComplete()">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Mark Step Complete
+                        </button>
+                        <button class="btn-step btn-next" id="btnNext" onclick="navigateStep(1)">
+                            Next Step
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Origami Master Completion Modal -->
+    <div id="origamiCelebrationModal" style="display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(5, 5, 12, 0.88); backdrop-filter: blur(12px); align-items: center; justify-content: center; padding: 1.5rem;">
+        <canvas id="celebrationCanvas" style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1;"></canvas>
+        <div style="position: relative; z-index: 2; max-width: 540px; width: 100%; background: #0c0d18; border: 1px solid rgba(255, 107, 53, 0.3); box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(255, 107, 53, 0.15); border-radius: 16px; padding: 2.5rem 2rem; text-align: center;">
+            <div style="font-size: 4rem; margin-bottom: 0.5rem; filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.6));" id="modalEmoji">🦚</div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; letter-spacing: 0.15em; color: var(--accent); margin-bottom: 0.25rem;">ORIGAMI MASTER ACHIEVEMENT</div>
+            <h2 id="modalKitTitle" style="font-family: 'Clash Display', sans-serif; font-size: 1.75rem; margin-bottom: 0.5rem; color: #ffffff;">Mayura — Imperial Indian Peacock</h2>
+            <p id="modalKitSub" style="color: var(--text-sub); font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.5rem;">
+                Magnificent paper engineering! You have completed all folds with mathematical precision.
+            </p>
+            
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border); border-radius: 10px; padding: 1rem; margin-bottom: 1.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;">
+                <div>
+                    <div style="color: var(--text-tert);">STEPS</div>
+                    <div style="font-weight: 700; color: #ffffff; font-size: 1rem; margin-top: 0.2rem;" id="modalStepsTotal">6 / 6</div>
+                </div>
+                <div>
+                    <div style="color: var(--text-tert);">DAILY STREAK</div>
+                    <div style="font-weight: 700; color: #f59e0b; font-size: 1rem; margin-top: 0.2rem;" id="modalDailyStreak">🔥 1 Day</div>
+                </div>
+                <div>
+                    <div style="color: var(--text-tert);">SEAL</div>
+                    <div style="font-weight: 700; color: #10b981; font-size: 1rem; margin-top: 0.2rem;" id="modalSealName">MASTER</div>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center;">
+                <a id="modalPrintLink" href="#" target="_blank" class="btn-step" style="background: rgba(0, 240, 255, 0.15); border: 1px solid var(--cyan); color: var(--cyan); padding: 0.75rem 1.25rem; text-decoration: none;">
+                    📄 Print A4 Certificate / Guide
+                </a>
+                <button onclick="closeCelebrationModal()" class="btn-step" style="background: linear-gradient(90deg, var(--accent), var(--accent-2)); color: white; padding: 0.75rem 1.25rem; cursor: pointer;">
+                    🌸 Return to Studio
+                </button>
+                <a href="../index.html" class="btn-step" style="background: var(--surface-2); border: 1px solid var(--border); color: var(--text-sub); padding: 0.75rem 1.25rem; text-decoration: none;">
+                    🏛️ Master Hub
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="kit-data.js"></script>
+    <script src="kit.js"></script>
+</body>
+</html>

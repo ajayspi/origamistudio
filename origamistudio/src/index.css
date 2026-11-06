@@ -1,0 +1,286 @@
+@import "tailwindcss";
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *, .dark, .dark *));
+
+@layer base {
+  :root, :root[data-theme="light"] {
+    --bg-page: #fbf9f4;
+    --bg-canvas: #fbf9f4;
+    --bg-surface: #f1eee7;
+    --bg-elevated: #f7f4ed;
+    --text-primary: #1c1917;
+    --text-secondary: #44403c;
+    --text-muted: #78716c;
+    --border-card: #e5e0d5;
+    --border-subtle: rgba(168, 162, 158, 0.2);
+    --border-prominent: rgba(168, 162, 158, 0.4);
+    --accent-btn: #059669;
+    --accent-vermillion: #e04822;
+    --accent-gold: #f59e0b;
+    --accent-cyan: #0891b2;
+    --accent-emerald: #059669;
+    --accent-purple: #7c3aed;
+    --color-paper-base: #fbf9f4;
+    --color-paper-shadow: rgba(168, 162, 158, 0.2);
+    --color-desk-wood: #f1eee7;
+    --shadow-tactile-rest: 6px 6px 14px #dedad1, -6px -6px 14px #ffffff;
+    --shadow-tactile-hover: 8px 8px 18px #dedad1, -8px -8px 18px #ffffff;
+    --shadow-tactile-pressed: inset 3px 3px 6px #dedad1, inset -3px -3px 6px #ffffff;
+  }
+
+  :root[data-theme="dark"], .dark {
+    --bg-page: #0c0a09;
+    --bg-canvas: #05060b;
+    --bg-surface: #0a0c16;
+    --bg-elevated: #101322;
+    --text-primary: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    --border-card: #292524;
+    --border-subtle: rgba(255, 255, 255, 0.07);
+    --border-prominent: rgba(255, 255, 255, 0.16);
+    --accent-btn: #06b6d4;
+    --accent-vermillion: #ff5e36;
+    --accent-gold: #f59e0b;
+    --accent-cyan: #06b6d4;
+    --accent-emerald: #10b981;
+    --accent-purple: #8b5cf6;
+    --color-paper-base: #0c0a09;
+    --color-paper-shadow: rgba(0, 0, 0, 0.4);
+    --color-desk-wood: #101322;
+    --shadow-tactile-rest: 0 4px 12px -2px rgba(0, 0, 0, 0.35);
+    --shadow-tactile-hover: 0 10px 22px -4px rgba(0, 0, 0, 0.45), 0 4px 8px -2px rgba(0, 0, 0, 0.25);
+    --shadow-tactile-pressed: inset 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+  }
+
+  body {
+    background-color: var(--bg-canvas);
+    color: var(--text-primary);
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+
+  /* Custom Scrollbars */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #05060b;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #ff5e36;
+  }
+}
+
+/* Glassmorphism Surface Primitives */
+.glass-panel {
+  background: var(--bg-surface);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+}
+
+.dark .glass-panel {
+  background: rgba(10, 12, 22, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-elevated {
+  background: var(--bg-elevated);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-prominent);
+  color: var(--text-primary);
+}
+
+.dark .glass-panel-elevated {
+  background: rgba(16, 19, 34, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.glass-card-hover {
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.glass-card-hover:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, 0.22);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7), 0 0 25px -5px rgba(255, 94, 54, 0.15);
+}
+
+/* Typography Helpers */
+.font-cinzel {
+  font-family: 'Cinzel', serif;
+}
+
+.font-fredoka {
+  font-family: 'Fredoka', 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
+.font-quicksand {
+  font-family: 'Quicksand', system-ui, sans-serif;
+}
+
+.font-jakarta {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.font-mono-code {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Keyframes & Animated Mesh Backgrounds */
+@keyframes meshShift {
+  0% { transform: translate(0%, 0%) rotate(0deg) scale(1); }
+  33% { transform: translate(4%, -3%) rotate(2deg) scale(1.05); }
+  66% { transform: translate(-3%, 4%) rotate(-2deg) scale(0.98); }
+  100% { transform: translate(0%, 0%) rotate(0deg) scale(1); }
+}
+
+@keyframes sparkPop {
+  0% { transform: scale(0) rotate(0deg); opacity: 0; }
+  50% { transform: scale(1.2) rotate(45deg); opacity: 1; }
+  100% { transform: scale(0) rotate(90deg); opacity: 0; }
+}
+
+.animate-mesh-slow {
+  animation: meshShift 18s ease-in-out infinite alternate;
+}
+
+.animate-spark {
+  animation: sparkPop 1.2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+@keyframes floatGentle {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(2deg); }
+}
+
+@keyframes pulseSubtle {
+  0%, 100% { opacity: 0.35; filter: blur(30px); }
+  50% { opacity: 0.65; filter: blur(45px); }
+}
+
+.animate-float-gentle {
+  animation: floatGentle 7s ease-in-out infinite;
+}
+
+.animate-pulse-subtle {
+  animation: pulseSubtle 5s ease-in-out infinite;
+}
+
+/* HFI Tactile Materiality Micro-Interactions */
+.btn-tactile {
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.15s ease, filter 0.15s ease;
+  box-shadow: var(--shadow-tactile-rest);
+}
+
+.btn-tactile:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.03);
+}
+
+.btn-tactile:active {
+  transform: translateY(1px) scale(0.97);
+  box-shadow: var(--shadow-tactile-pressed);
+  filter: brightness(0.96);
+}
+
+.btn-tactile:focus-visible {
+  outline: 2px solid var(--text-primary);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px var(--accent-gold);
+}
+
+.btn-tactile-vonrestorff {
+  background: linear-gradient(to right, #d4af37, #b38927);
+  color: #0c0a09;
+  font-weight: 800;
+  box-shadow: 0 8px 20px -4px rgba(212, 175, 55, 0.35);
+}
+
+.btn-tactile-vonrestorff:hover {
+  background: linear-gradient(to right, #dfba48, #be9332);
+  box-shadow: 0 12px 26px -4px rgba(212, 175, 55, 0.45);
+}
+
+/* =========================================================================
+   Adam Giebl Soft-UI Neumorphic Design System (Warm Parchment & Stone)
+   ========================================================================= */
+
+.neumorph-stone-raised {
+  background: #f1eee7;
+  box-shadow: 6px 6px 14px #dedad1, -6px -6px 14px #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 1rem;
+}
+
+:root[data-theme="dark"] .neumorph-stone-raised,
+.dark .neumorph-stone-raised {
+  background: #11131b;
+  box-shadow: 6px 6px 14px #090a0f, -4px -4px 10px #1a1e2b;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.neumorph-stone-pressed {
+  background: #f1eee7;
+  box-shadow: inset 3px 3px 6px #dedad1, inset -3px -3px 6px #ffffff;
+  border-radius: 1rem;
+}
+
+:root[data-theme="dark"] .neumorph-stone-pressed,
+.dark .neumorph-stone-pressed {
+  background: #0e1017;
+  box-shadow: inset 3px 3px 6px #07080c, inset -2px -2px 5px #1a1e2b;
+}
+
+.neumorph-stone-concave {
+  background: linear-gradient(145deg, #e4e0d7, #ffffff);
+  box-shadow: 5px 5px 12px #dedad1, -5px -5px 12px #ffffff;
+  border-radius: 1rem;
+}
+
+:root[data-theme="dark"] .neumorph-stone-concave,
+.dark .neumorph-stone-concave {
+  background: linear-gradient(145deg, #0d0f15, #141722);
+  box-shadow: 5px 5px 12px #07080c, -4px -4px 10px #1a1e2b;
+}
+
+.neumorph-amber-convex {
+  background: linear-gradient(145deg, #f59e0b, #d97706);
+  box-shadow: 4px 4px 12px rgba(245, 158, 11, 0.35), -2px -2px 6px #ffffff;
+  color: #ffffff !important;
+  font-weight: 700;
+  border-radius: 1rem;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.neumorph-amber-convex:hover {
+  background: linear-gradient(145deg, #fbbf24, #d97706);
+  box-shadow: 6px 6px 16px rgba(245, 158, 11, 0.45), -3px -3px 8px #ffffff;
+  transform: translateY(-1px);
+}
+
+.neumorph-amber-convex:active {
+  background: linear-gradient(145deg, #d97706, #b45309);
+  box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.3);
+  transform: translateY(0);
+}
+
+.neumorph-parchment-well {
+  background: #fbf9f4;
+  box-shadow: inset 2px 2px 5px #e5e0d5, inset -2px -2px 5px #ffffff;
+  border-radius: 0.75rem;
+}
+
+:root[data-theme="dark"] .neumorph-parchment-well,
+.dark .neumorph-parchment-well {
+  background: #090a0f;
+  box-shadow: inset 2px 2px 5px #050608, inset -1px -1px 3px #161922;
+}
+

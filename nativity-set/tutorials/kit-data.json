@@ -1,0 +1,265 @@
+[
+  {
+    "id": "kit-01",
+    "kitNumber": 1,
+    "title": "Architectural Stable",
+    "subtitle": "Build the angled, recessed 3D stable",
+    "description": "Create the foundation. Focus on angled walls, recessed alcove and layered roof to build depth for the rest of the scene.",
+    "difficulty": "Intermediate",
+    "time": "25-35 min",
+    "paper": [
+      { "color": "Brown Kraft / Textured Brown", "size": "6\" x 6\"", "qty": 2 },
+      { "color": "Darker Brown", "size": "6\" x 6\"", "qty": 1 },
+      { "color": "Light Tan", "size": "6\" x 6\"", "qty": 1 }
+    ],
+    "accent": "#8c7356",
+    "goal": "A freestanding, angled stable with a recessed manger alcove",
+    "steps": [
+      {
+        "stepNumber": 1,
+        "title": "Create The Base Platform",
+        "time": "3-5 min",
+        "instruction": "Take your light tan 6\" square. Fold a small tab along the bottom edge (~1\"). This tab will lock your walls later and keep the whole stable stable on your display tray.",
+        "tip": "Don't make this tab too big. A thin, crisp tab is stronger than a wide floppy one.",
+        "diagramType": "base"
+      },
+      {
+        "stepNumber": 2,
+        "title": "Fold The Back Wall",
+        "time": "4-6 min",
+        "instruction": "Take your first brown 6\" square. Crease lengthwise. Instead of cutting a perfect triangle, angle the top corners inwards at roughly 25-30 degrees to create a sloped stable roofline. Leave room for the alcove to recess behind it.",
+        "tip": "Keep it slightly taller in the middle. Subtle asymmetry looks far more architectural than perfectly symmetrical.",
+        "diagramType": "wall"
+      },
+      {
+        "stepNumber": 3,
+        "title": "Shape The Angled Side Walls",
+        "time": "6-8 min",
+        "instruction": "Take your second brown 6\" square and cut/fold down to ~5.5\". Create a base tab (~0.75\"). Angle the top edge to match your back wall slope. Do NOT fold these at 90 degrees. Angle them in towards eachother to form a cozy, recessed alcove.",
+        "tip": "Test fit as you go. If you can see straight through the middle with no recess, angle them in more.",
+        "diagramType": "walls"
+      },
+      {
+        "stepNumber": 4,
+        "title": "Build The Recessed Manger Alcove",
+        "time": "3-5 min",
+        "instruction": "Using scraps or small folds behind the front opening, build up the back of the alcove. Create a small step/niche for the manger to sit in, slightly recessed from the opening of the stable.",
+        "tip": "Depth is the goal here. A 1/4\" recess reads incredibly well once figures are placed inside.",
+        "diagramType": "alcove"
+      },
+      {
+        "stepNumber": 5,
+        "title": "Layer The Roof",
+        "time": "6-8 min",
+        "instruction": "Take your darker brown 6\" square. Instead of one flat triangle, fold overlapping strips to mimic thatch. Angle the roof so it slightly overhangs the front. Leave the front fully open.",
+        "tip": "Offset each layer slightly. The staggered edges are what sell the 'built', not 'cut' look.",
+        "diagramType": "roof"
+      },
+      {
+        "stepNumber": 6,
+        "title": "Assemble & Lock In",
+        "time": "3-5 min",
+        "instruction": "Mount to your light tan base. Lock the tabs into one another, adjusting the inward angle until it feels tight and freestanding. View from the front to check for a nice, deep alcove.",
+        "tip": "Don't glue yet. Get the angle perfect first, then only glue if it's unstable on your display surface.",
+        "diagramType": "assemble"
+      }
+    ]
+  },
+  {
+    "id": "kit-02",
+    "kitNumber": 2,
+    "title": "Holy Family",
+    "subtitle": "Mary, Joseph & Baby Jesus",
+    "description": "The heart of the scene. Focus on drapery, weight and a reverent composition.",
+    "difficulty": "Intermediate-Advanced",
+    "time": "35-45 min",
+    "paper": [
+      { "color": "Deep Royal Blue", "size": "4\" x 4\"", "qty": 1 },
+      { "color": "Burgundy / Wine", "size": "4.5\" x 4.5\"", "qty": 1 },
+      { "color": "Cream / Ivory", "size": "1.25\" x 1.25\"", "qty": 1 },
+      { "color": "Gold Foil (trim)", "size": "0.5\" strip", "qty": 1 }
+    ],
+    "accent": "#7c3fbf",
+    "goal": "A kneeling Mary, monumental Joseph and a nested, swaddled Jesus for the recessed manger",
+    "steps": [
+      { "stepNumber": 1, "title": "Baby Jesus - Nested Swaddle", "time": "4-6 min", "instruction": "Take your 1.25\" cream square. Avoid a flat diamond. Create layered folds to build bulk, wrapping in overlapping 'blankets'. Taper slightly to an oval form to look swaddled.", "tip": "Smaller is better here. Keep it tight and nest it first to check scale.", "diagramType": "baby" },
+      { "stepNumber": 2, "title": "Mary - Kneeling Base", "time": "6-8 min", "instruction": "Take your 4\" royal blue square. Form a conical body, but angle the base to naturally kneel rather than stand straight. Keep the front slightly tilted towards where the manger will be.", "tip": "Test the angle against your stable alcove constantly.", "diagramType": "mary-base" },
+      { "stepNumber": 3, "title": "Mary - Cascading Robes", "time": "8-10 min", "instruction": "Create radiating pleats along the lower third of Mary's robes. Make them slightly staggered in size to mimic heavy fabric falling and pooling.", "tip": "Pleat outwards, not perfectly even. Uneven pleats read as cloth.", "diagramType": "mary-pleats" },
+      { "stepNumber": 4, "title": "Mary - Veil & Details", "time": "3-5 min", "instruction": "Fold a tiny veil from scrap, add soft pleats and drape over head/shoulders. Add the tiniest gold foil trim if desired.", "tip": "Let the veil overlap the robes, don't tuck it in flush.", "diagramType": "mary-veil" },
+      { "stepNumber": 5, "title": "Joseph - Monumental Form", "time": "8-10 min", "instruction": "Take your 4.5\" burgundy square. Build a wider, heavier base. Create a hooded cloak with depth by layering, not just folding a point. Angle him slightly in a protective stance.", "tip": "Make him slightly taller and broader than Mary to create a natural hierarchy.", "diagramType": "joseph" },
+      { "stepNumber": 6, "title": "Nest Holy Family", "time": "2-4 min", "instruction": "Place Baby Jesus in the recessed manger. Angle Mary kneeling adjacent to it. Place Joseph behind/slightly to the side, turned in towards them.", "tip": "Turn their forms towards eachother. Tiny angles create a ton of warmth.", "diagramType": "holy-family" }
+    ]
+  },
+  {
+    "id": "kit-03",
+    "kitNumber": 3,
+    "title": "Angel",
+    "subtitle": "Sculpted soaring form with 3D wings",
+    "description": "Build vertically with upward flowing robes and multi-layered wings for drama.",
+    "difficulty": "Advanced",
+    "time": "30-40 min",
+    "paper": [
+      { "color": "Pearlescent White / Ivory", "size": "4\" x 4\"", "qty": 1 },
+      { "color": "Pearlescent White (wings)", "size": "2.25\" x 2.25\"", "qty": 3 },
+      { "color": "Gold Foil (accent)", "size": "Tiny strip", "qty": 1 }
+    ],
+    "accent": "#f5f3ff",
+    "goal": "A tall, soaring angel with layered 3D wings curving upwards",
+    "steps": [
+      { "stepNumber": 1, "title": "Elongated Body", "time": "5-7 min", "instruction": "Start with 4\" pearlescent square. Form a more elongated, vertical cone. Flow the robes upward, not down, to imply soaring.", "tip": "Keep the base narrow enough to stand, but don't make it bulky.", "diagramType": "angel-body" },
+      { "stepNumber": 2, "title": "Flowing Robes", "time": "5-7 min", "instruction": "Create subtle upward folds to give motion to the robes. Taper gently as you go up.", "tip": "Think 'billowing in the air', not 'hanging down'.", "diagramType": "angel-robes" },
+      { "stepNumber": 3, "title": "Wing Armatures", "time": "6-8 min", "instruction": "Take your 2.25\" squares and form elongated kite shapes. These will be the bases for your feather layers.", "tip": "Curve them gently with your fingers before layering.", "diagramType": "wing-armature" },
+      { "stepNumber": 4, "title": "Feather Layers", "time": "7-9 min", "instruction": "Fold smaller feather elements from scraps. Layer them onto the armatures, offsetting each row slightly. Build up 2-3 layers per wing.", "tip": "Don't cover the entire armature. Leaving tiny gaps reads as delicate feathers.", "diagramType": "feathers" },
+      { "stepNumber": 5, "title": "Curve & Attach", "time": "4-6 min", "instruction": "Curve both wings into an upward arc. Attach at an angle to the back of the angel, not flat against it. Add a tiny halo if desired.", "tip": "The upward curve is what creates the 'soaring' look.", "diagramType": "angel-wings" }
+    ]
+  },
+  {
+    "id": "kit-04",
+    "kitNumber": 4,
+    "title": "Star of Bethlehem",
+    "subtitle": "Radiant 3D starburst",
+    "description": "A bold 3D star, not a flat 5-point. Designed to sit above the scene.",
+    "difficulty": "Intermediate",
+    "time": "12-18 min",
+    "paper": [
+      { "color": "Heavy Gold Foil", "size": "4\" x 4\"", "qty": 2 }
+    ],
+    "accent": "#f59e0b",
+    "goal": "A dimensional starburst with layered points catching the light",
+    "steps": [
+      { "stepNumber": 1, "title": "Form The Core", "time": "3-5 min", "instruction": "Take your first 4\" gold foil square. Create a tight, geometric core with crisp creases. Foil needs patience, go slow.", "tip": "Use a bone folder and press gently to avoid tearing.", "diagramType": "star-core" },
+      { "stepNumber": 2, "title": "Layer Points", "time": "5-7 min", "instruction": "From your second square, form elongated points. Layer and interlock them over the core, staggering their angles slightly.", "tip": "Don't make every point identical. Varying them subtly looks more radiant.", "diagramType": "star-points" },
+      { "stepNumber": 3, "title": "Pop To 3D", "time": "3-5 min", "instruction": "Gently open and cup the star to create dimension. Angle points up and out to catch light from different angles.", "tip": "View under direct light. Adjust until it has that starburst effect.", "diagramType": "star-3d" }
+    ]
+  },
+  {
+    "id": "kit-05",
+    "kitNumber": 5,
+    "title": "Shepherd & Sheep",
+    "subtitle": "Rustic figures to bring life to the scene",
+    "description": "Looser, more organic folds for a working shepherd and woolly sheep.",
+    "difficulty": "Beginner-Intermediate",
+    "time": "20-25 min",
+    "paper": [
+      { "color": "Olive / Tan", "size": "4\" x 4\"", "qty": 1 },
+      { "color": "Cream / Ivory", "size": "2.75\" x 2.75\"", "qty": 2 },
+      { "color": "Dark Brown (staff)", "size": "1\" x 3\"", "qty": 1 }
+    ],
+    "accent": "#a3a07c",
+    "goal": "A crouched shepherd with staff and two rounded, woolly sheep",
+    "steps": [
+      { "stepNumber": 1, "title": "Shepherd Base - Crouched", "time": "5-7 min", "instruction": "Take 4\" olive/tan. Create a lower, wider base and angle the body as if crouching or leaning slightly forward.", "tip": "Crouching brings him down to sheep level and adds great depth.", "diagramType": "shepherd-base" },
+      { "stepNumber": 2, "title": "Rugged Robes", "time": "5-6 min", "instruction": "Use looser folds with less perfect pleats. Leave some edges a little uneven to suggest weathered wool cloth.", "tip": "Don't over-pleat. Fewer, bigger folds look more rustic.", "diagramType": "shepherd-robes" },
+      { "stepNumber": 3, "title": "Staff", "time": "2-3 min", "instruction": "Fold your 1\"x3\" strip into a thin, slightly crooked staff. Tuck or attach subtly to his hand area.", "tip": "A tiny bend in the staff adds character instantly.", "diagramType": "staff" },
+      { "stepNumber": 4, "title": "Woolly Sheep", "time": "6-8 min", "instruction": "For each 2.75\" cream square, create a rounded body. Add small, layered pleats all around to mimic a woolly coat. Shape a small head separately.", "tip": "Round with your fingers constantly. The rounder they are, the woollier they look.", "diagramType": "sheep" }
+    ]
+  },
+  {
+    "id": "kit-06",
+    "kitNumber": 6,
+    "title": "Wise Man 1 - Melchior",
+    "subtitle": "Imperial purple, tallest & most elaborate",
+    "description": "The grandest of the three. Focus on a tall layered headdress and full, radiating robes.",
+    "difficulty": "Advanced",
+    "time": "35-40 min",
+    "paper": [
+      { "color": "Imperial Purple", "size": "5\" x 5\"", "qty": 1 },
+      { "color": "Gold Foil (brocade/crown)", "size": "0.75\" x 0.75\"", "qty": 2 }
+    ],
+    "accent": "#8b5cf6",
+    "goal": "Tall kneeling figure with layered turban/crown and radiating robes bearing an offering",
+    "steps": [
+      { "stepNumber": 1, "title": "Tall Base & Kneeling Pose", "time": "6-8 min", "instruction": "Start with 5\" imperial purple. Build a taller form and angle to kneel. Leave room for an elaborate headdress.", "tip": "This one should be the tallest of the three Wise Men.", "diagramType": "melchior-base" },
+      { "stepNumber": 2, "title": "Radiating Robes", "time": "10-12 min", "instruction": "Create full, radiating pleats around the lower robes. Layer them in rings going outwards to create maximum fullness.", "tip": "Build up in layers, don't do all pleats from one flap.", "diagramType": "melchior-robes" },
+      { "stepNumber": 3, "title": "Layered Headdress/Crown", "time": "10-12 min", "instruction": "Build up your turban in separate bands. Add gold foil elements for brocade/jewels. Make it tall and regal.", "tip": "Stack vertically in thin bands for that architectural crown look.", "diagramType": "melchior-crown" },
+      { "stepNumber": 4, "title": "Offering & Finishing", "time": "4-6 min", "instruction": "Fold a small gold offering separately. Angle him kneeling towards the Holy Family. Shape the robes to fan slightly.", "tip": "Fan the front pleats open a little to draw the eye to the offering.", "diagramType": "melchior-final" }
+    ]
+  },
+  {
+    "id": "kit-07",
+    "kitNumber": 7,
+    "title": "Wise Man 2 - Balthazar",
+    "subtitle": "Deep crimson, standing and dignified",
+    "description": "Contrasting pose to Melchior. Focus on a wrapped turban and strong, elegant robes.",
+    "difficulty": "Advanced",
+    "time": "32-38 min",
+    "paper": [
+      { "color": "Deep Crimson", "size": "4.75\" x 4.75\"", "qty": 1 },
+      { "color": "Gold Foil (trim)", "size": "0.75\" x 0.75\"", "qty": 1 }
+    ],
+    "accent": "#dc2626",
+    "goal": "A standing, dignified figure with wrapped turban and strong drapery bearing his gift",
+    "steps": [
+      { "stepNumber": 1, "title": "Upright Base", "time": "6-8 min", "instruction": "Start with 4.75\" crimson. Build a stable standing form, slightly turned at the waist for movement.", "tip": "A subtle turn breaks up the symmetry with the others.", "diagramType": "balthazar-base" },
+      { "stepNumber": 2, "title": "Wrapped Turban", "time": "8-10 min", "instruction": "Create a wrapped turban with overlapping layers, different from Melchior's stacked crown. Keep it slightly angled.", "tip": "Think wrapped cloth, not a cylinder. Overlap more than you think.", "diagramType": "balthazar-turban" },
+      { "stepNumber": 3, "title": "Elegant Drapery", "time": "8-10 min", "instruction": "Fold elegant, longer robes with fewer, larger pleats. Create strong vertical lines with subtle movement.", "tip": "Longer and more streamlined than Melchior's full fan.", "diagramType": "balthazar-robes" },
+      { "stepNumber": 4, "title": "Bearing The Gift", "time": "4-6 min", "instruction": "Form a small gift chest/jar. Position him approaching from mid-distance, turned towards the Holy Family.", "tip": "Turn his shoulders in towards the scene.", "diagramType": "balthazar-final" }
+    ]
+  },
+  {
+    "id": "kit-08",
+    "kitNumber": 8,
+    "title": "Wise Man 3 - Gaspar",
+    "subtitle": "Emerald green, bowing in reverence",
+    "description": "Smaller in height but full of movement. A deep bow creates a beautiful compositional triangle.",
+    "difficulty": "Advanced",
+    "time": "28-34 min",
+    "paper": [
+      { "color": "Emerald Green", "size": "4.5\" x 4.5\"", "qty": 1 },
+      { "color": "Gold Foil (accent)", "size": "0.75\" x 0.75\"", "qty": 1 }
+    ],
+    "accent": "#10b981",
+    "goal": "A bowing figure with a distinctive headdress and robes flowing with the motion",
+    "steps": [
+      { "stepNumber": 1, "title": "Bowing Structure", "time": "6-8 min", "instruction": "Start with 4.5\" emerald. Build a form designed to bow at the waist/upper body. Don't just tilt the whole thing.", "tip": "Create an actual bend in the form to sell the bow.", "diagramType": "gaspar-base" },
+      { "stepNumber": 2, "title": "Distinctive Headdress", "time": "6-8 min", "instruction": "Make a completely different headdress from the other two. Try a unique wrapped shape with a different profile.", "tip": "All three MUST look distinct at a glance.", "diagramType": "gaspar-headdress" },
+      { "stepNumber": 3, "title": "Flowing With Motion", "time": "8-10 min", "instruction": "Let the robes flow with the bow. Pleat them to drape down and around with the motion, not straight.", "tip": "Shape the robes after folding to follow the curve of the bow.", "diagramType": "gaspar-robes" },
+      { "stepNumber": 4, "title": "Reverent Offering", "time": "4-6 min", "instruction": "Fold a gift. Position closest to the stable, bowing deeply towards Baby Jesus.", "tip": "This one being lowest creates beautiful leading lines into the alcove.", "diagramType": "gaspar-final" }
+    ]
+  },
+  {
+    "id": "kit-09",
+    "kitNumber": 9,
+    "title": "Donkey & Ox",
+    "subtitle": "Sculpted animals to complete the stable",
+    "description": "More architectural than cute. Focus on profile, weight and integration into the scene.",
+    "difficulty": "Intermediate-Advanced",
+    "time": "24-30 min",
+    "paper": [
+      { "color": "Warm Grey", "size": "3.25\" x 3.25\"", "qty": 1 },
+      { "color": "Warm Brown", "size": "3.5\" x 3.5\"", "qty": 1 },
+      { "color": "Cream (details)", "size": "1\" x 1\"", "qty": 1 }
+    ],
+    "accent": "#78716c",
+    "goal": "A sturdy donkey and a solid ox with good profiles",
+    "steps": [
+      { "stepNumber": 1, "title": "Donkey - Body & Profile", "time": "7-9 min", "instruction": "Take 3.25\" warm grey. Build a longer, more rectangular body with a distinct head/neck profile. Keep weight low to the ground.", "tip": "Focus more on silhouette from the side than from above.", "diagramType": "donkey-body" },
+      { "stepNumber": 2, "title": "Donkey - Details", "time": "4-5 min", "instruction": "Shape ears, refine the head and add a small tail. Keep legs subtle and tucked for stability.", "tip": "Less detail, more shape.", "diagramType": "donkey-details" },
+      { "stepNumber": 3, "title": "Ox - Heavier Form", "time": "7-9 min", "instruction": "Take 3.5\" warm brown. Build a stockier, wider body. Create a broader head with a heavier look.", "tip": "Make him a little wider than the donkey to contrast.", "diagramType": "ox-body" },
+      { "stepNumber": 4, "title": "Place Naturally", "time": "3-5 min", "instruction": "Place donkey/ox near the entrance or just outside. Don't symmetrically flank - let them feel naturally settled.", "tip": "Turn them slightly towards the stable, not facing away.", "diagramType": "animals-place" }
+    ]
+  },
+  {
+    "id": "kit-10",
+    "kitNumber": 10,
+    "title": "Complete Scene Assembly",
+    "subtitle": "Bring the whole set together",
+    "description": "Compose for depth, story and drama. This is where it all comes together.",
+    "difficulty": "Intermediate",
+    "time": "15-20 min",
+    "paper": [
+      { "color": "Light Tan / Sand", "size": "8\" x 10\" (or larger)", "qty": 1 },
+      { "color": "Scraps for path", "size": "As needed", "qty": 1 }
+    ],
+    "accent": "#fbbf24",
+    "goal": "A unified 3D scene with depth, leading lines and storytelling",
+    "steps": [
+      { "stepNumber": 1, "title": "Prep The Display", "time": "2-3 min", "instruction": "Cover your tray/base with light tan paper. Add a subtle paper path leading up to the stable entrance.", "tip": "Keep the path angled, not a straight ruler line.", "diagramType": "display-prep" },
+      { "stepNumber": 2, "title": "Anchor The Stable", "time": "2-3 min", "instruction": "Set your architectural stable slightly back or centered. Make sure it's rock solid before adding everything else.", "tip": "View from eye level to check the alcove reads correctly.", "diagramType": "anchor-stable" },
+      { "stepNumber": 3, "title": "Holy Family In The Depth", "time": "2-3 min", "instruction": "Nest Holy Family deep in the recessed alcove. Keep focus on them.", "tip": "Push them back into the depth, not right on the front lip.", "diagramType": "place-holy" },
+      { "stepNumber": 4, "title": "Shepherd, Animals & Journey", "time": "3-4 min", "instruction": "Place shepherd with sheep near entrance or slightly outside. Add donkey/ox naturally. Start laying the Wise Men along your angled path.", "tip": "Don't crowd the entrance. Leave breathing room.", "diagramType": "place-mid" },
+      { "stepNumber": 5, "title": "Wise Men Approaching", "time": "2-3 min", "instruction": "Place Melchior furthest back along the path, Balthazar mid-way turned in, Gaspar closest bowing deeply towards the alcove.", "tip": "Stagger their positions. Each should be turned towards the Holy Family.", "diagramType": "wise-men-path" },
+      { "stepNumber": 6, "title": "Angel & Star, Final Adjustments", "time": "3-4 min", "instruction": "Place angel above and slightly behind the stable, soaring upward. Add star above. Tweak angles of every figure to create leading lines to the manger. View from multiple angles and adjust until it tells the story.", "tip": "Squint your eyes. If your eye goes straight to Baby Jesus, you nailed the composition.", "diagramType": "final" }
+    ]
+  }
+]

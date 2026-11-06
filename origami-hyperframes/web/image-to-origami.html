@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Image to Origami Converter | ORIGAMISTUDIO</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Clash+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/hub.css">
+    <style>
+        body { padding-top: 75px; background: #05050c; color: #ffffff; min-height: 100vh; }
+        .converter-page { max-width: 1500px; margin: 0 auto; padding: 2rem; }
+        
+        .converter-header { text-align: center; margin-bottom: 2.5rem; }
+        .converter-title { font-family: 'Clash Display', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 0.75rem; }
+        .converter-subtitle { color: var(--text-sub); font-size: 1.05rem; max-width: 750px; margin: 0 auto; line-height: 1.6; }
+        
+        /* Global Presets Shelf */
+        .preset-shelf { margin-bottom: 2rem; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; }
+        .shelf-title { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; letter-spacing: 0.15em; color: var(--accent); margin-bottom: 0.75rem; text-transform: uppercase; }
+        .preset-chips { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+        .preset-chip {
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 0.45rem 0.85rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-family: 'JetBrains Mono', monospace;
+            cursor: pointer;
+            transition: all 0.25s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .preset-chip:hover {
+            border-color: var(--cyan);
+            background: rgba(0, 240, 255, 0.08);
+            transform: translateY(-2px);
+        }
+
+        /* 2-Column Grid Layout */
+        .converter-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2.5rem; }
+        
+        .upload-zone {
+            background: var(--surface);
+            border: 2px dashed var(--border-2);
+            border-radius: 12px;
+            padding: 2.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            min-height: 420px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+        .upload-zone:hover { border-color: var(--accent); background: rgba(255, 107, 53, 0.04); }
+        .upload-zone.dragover { border-color: var(--cyan); background: rgba(0, 240, 255, 0.06); }
+        .upload-icon { width: 56px; height: 56px; color: var(--accent); }
+        .upload-text { font-size: 1.15rem; font-weight: 600; }
+        .upload-subtext { color: var(--text-tert); font-size: 0.85rem; }
+        
+        #imagePreview {
+            max-width: 100%;
+            max-height: 320px;
+            display: none;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid var(--border-2);
+        }
+        
+        /* Analysis Panel */
+        .analysis-panel {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .panel-title { font-family: 'Clash Display', sans-serif; font-size: 1.35rem; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.6rem; }
+        
+        .analysis-card-group { display: flex; flex-direction: column; gap: 0.75rem; flex: 1; }
+        .analysis-item { padding: 0.85rem 1rem; background: var(--surface-2); border-left: 3px solid var(--accent); border-radius: 0 6px 6px 0; }
+        .analysis-label { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 0.25rem; }
+        .analysis-value { color: var(--text-sub); font-size: 0.875rem; line-height: 1.5; }
+        
+        .color-palette-chips { display: flex; gap: 0.5rem; margin-top: 0.35rem; }
+        .palette-chip { width: 24px; height: 24px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.2); }
+        
+        /* Metrics Bars */
+        .metric-row { margin-top: 0.35rem; }
+        .metric-label-val { display: flex; justify-content: space-between; font-size: 0.75rem; font-family: 'JetBrains Mono', monospace; margin-bottom: 0.2rem; }
+        .metric-bar-bg { width: 100%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; }
+        .metric-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--cyan)); transition: width 0.8s ease; }
+
+        .generate-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+        }
+        .generate-btn:hover:not(:disabled) { opacity: 0.92; transform: translateY(-1px); box-shadow: 0 4px 20px rgba(255, 107, 53, 0.3); }
+        .generate-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+        /* Results Section */
+        .results-section { display: none; margin-top: 3rem; border-top: 1px solid var(--border); padding-top: 3rem; }
+        
+        .results-action-bar {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem 1.75rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .action-bar-title h3 { font-family: 'Clash Display', sans-serif; font-size: 1.35rem; }
+        .action-bar-title p { color: var(--text-sub); font-size: 0.85rem; }
+        .action-bar-btns { display: flex; gap: 0.75rem; }
+        
+        .btn-launch-studio {
+            background: linear-gradient(90deg, var(--accent), var(--cyan));
+            color: #000000;
+            font-weight: 700;
+            padding: 0.65rem 1.25rem;
+            border-radius: 6px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+        }
+        .btn-launch-studio:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0, 240, 255, 0.3); }
+
+        .btn-print-guide {
+            background: var(--surface-2);
+            color: #ffffff;
+            border: 1px solid var(--border-2);
+            font-weight: 600;
+            padding: 0.65rem 1.25rem;
+            border-radius: 6px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+        }
+        .btn-print-guide:hover { border-color: var(--cyan); color: var(--cyan); }
+
+        .results-grid { display: grid; grid-template-columns: 340px 1fr; gap: 2rem; align-items: start; }
+        
+        .cp-preview-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .cp-preview-card h4 { font-family: 'Clash Display', sans-serif; margin-bottom: 1rem; }
+        .cp-svg-box {
+            width: 100%;
+            height: 280px;
+            background: #080812;
+            border: 1px solid var(--border-2);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .steps-card-list { display: flex; flex-direction: column; gap: 1rem; }
+        .step-result-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.25rem 1.5rem;
+            transition: all 0.25s;
+        }
+        .step-result-card:hover { border-color: var(--border-2); background: var(--surface-2); }
+        
+        .step-result-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+        .step-num-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent);
+            background: rgba(255, 107, 53, 0.1);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+        .step-fold-name { font-weight: 600; font-size: 1.05rem; }
+        .step-result-instruction { color: var(--text-sub); font-size: 0.875rem; line-height: 1.6; margin-bottom: 0.5rem; }
+        .step-result-tip { background: rgba(0, 240, 255, 0.05); border-left: 2px solid var(--cyan); padding: 0.4rem 0.75rem; font-size: 0.8rem; color: var(--cyan); }
+
+        /* Hidden Canvas for Computer Vision */
+        #cvCanvas { display: none; }
+
+        @media (max-width: 1024px) {
+            .converter-grid, .results-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-inner">
+            <div class="nav-logo">
+                <span class="logo-bracket">[</span>ORIGAMI<span class="logo-dot">.</span>HF<span class="logo-bracket">]</span>
+            </div>
+            <div class="nav-links">
+                <a href="index.html#collections" class="nav-link">COLLECTIONS</a>
+                <a href="index.html#kits" class="nav-link">ALL KITS</a>
+                <a href="image-to-origami.html" class="nav-link" style="color: var(--cyan);">IMAGE TO ORIGAMI</a>
+                <a href="index.html#guides" class="nav-link">PRINT GUIDES</a>
+            </div>
+            <div class="nav-status">
+                <span class="status-dot"></span>
+                <span class="status-text">CV ENGINE READY</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="converter-page">
+        <header class="converter-header">
+            <div class="section-label"><span class="label-dot"></span><span>COMPUTER VISION & KINEMATICS</span></div>
+            <h1 class="converter-title">IMAGE <span style="background: linear-gradient(90deg, var(--accent), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">TO ORIGAMI</span></h1>
+            <p class="converter-subtitle">
+                Upload any photograph, logo, or icon. Our computer vision engine extracts geometric silhouettes, color palettes, and symmetry to synthesize a foldable origami design with full 3D interactive tutorials.
+            </p>
+        </header>
+
+        <!-- Global Cultural Presets Shelf -->
+        <section class="preset-shelf">
+            <div class="shelf-title">✨ Quick Test Gallery — Global Cultural Masterworks:</div>
+            <div class="preset-chips">
+                <button class="preset-chip" onclick="loadPreset('lotus')">🪷 Sacred Lotus Blossom</button>
+                <button class="preset-chip" onclick="loadPreset('peacock')">🦚 Mayura Peacock</button>
+                <button class="preset-chip" onclick="loadPreset('eagle')">🦅 American Bald Eagle</button>
+                <button class="preset-chip" onclick="loadPreset('sakura')">🌸 Sakura Hanami Blossom</button>
+                <button class="preset-chip" onclick="loadPreset('lantern')">🏮 Chinese Palace Lantern</button>
+                <button class="preset-chip" onclick="loadPreset('dragon')">🐉 Imperial Dragon</button>
+                <button class="preset-chip" onclick="loadPreset('butterfly')">🦋 Monarch Butterfly</button>
+                <button class="preset-chip" onclick="loadPreset('elephant')">🐘 Mysore Royal Elephant</button>
+                <button class="preset-chip" onclick="loadPreset('frog')">🐸 Kinetic Jumping Frog</button>
+            </div>
+        </section>
+
+        <div class="converter-grid">
+            <!-- Left Upload Area -->
+            <div class="upload-section">
+                <div class="upload-zone" id="uploadZone">
+                    <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                    <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="17 8 12 3 7 8"></polyline>
+                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                    </svg>
+                    <div class="upload-text">Drop image here or click to browse</div>
+                    <div class="upload-subtext">Supports PNG, JPG, WebP, SVG • Or paste from clipboard (Ctrl+V)</div>
+                    <img id="imagePreview" alt="Analyzed Subject">
+                </div>
+            </div>
+
+            <!-- Right Real-Time Analysis Panel -->
+            <div class="analysis-panel">
+                <h2 class="panel-title">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M12 1v6m0 6v6m11-7h-6m-6 0H1"></path>
+                    </svg>
+                    COMPUTER VISION TELEMETRY
+                </h2>
+                
+                <div class="analysis-card-group" id="analysisContent">
+                    <p style="color: var(--text-tert); text-align: center; padding: 3rem 1rem;">
+                        Select a cultural preset above or upload an image to begin computer vision geometric analysis.
+                    </p>
+                </div>
+
+                <button class="generate-btn" id="generateBtn" disabled>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                    </svg>
+                    SYNTHESIZE ORIGAMI DESIGN
+                </button>
+            </div>
+        </div>
+
+        <!-- Generated Results & Fold Sequence Section -->
+        <section class="results-section" id="resultsSection">
+            <div class="results-action-bar">
+                <div class="action-bar-title">
+                    <h3 id="resultKitTitle">AI Synthesized Origami Kit</h3>
+                    <p id="resultKitSubtitle">Foldable 3D Model • Computer Vision Verified • Crease Pattern Ready</p>
+                </div>
+                <div class="action-bar-btns">
+                    <a href="print-guide.html?id=custom" target="_blank" class="btn-print-guide" id="btnDownloadPrint">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                            <rect x="6" y="14" width="12" height="8"></rect>
+                        </svg>
+                        Print A4 Guide
+                    </a>
+                    <a href="studio/kit.html?id=custom" class="btn-launch-studio" id="btnLaunchStudio">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                        </svg>
+                        Open in 3D Studio
+                    </a>
+                </div>
+            </div>
+
+            <div class="results-grid">
+                <!-- Left CP Preview -->
+                <div class="cp-preview-card">
+                    <h4>CREASE PATTERN (CP)</h4>
+                    <div class="cp-svg-box" id="resultCpBox"></div>
+                    <p style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--text-tert); margin-bottom: 1rem;">
+                        Red: Mountain (- · -) • Blue: Valley (---)
+                    </p>
+                    <button class="btn-print-guide" style="width: 100%; justify-content: center;" onclick="downloadCPSVG()">
+                        Download SVG Pattern
+                    </button>
+                </div>
+
+                <!-- Right Step-by-Step Cards -->
+                <div class="steps-card-list" id="resultStepsList"></div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Hidden Canvas for CV Convolution -->
+    <canvas id="cvCanvas"></canvas>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="js/image-to-origami.js"></script>
+</body>
+</html>

@@ -1,0 +1,237 @@
+@page {
+    size: A4;
+    margin: 15mm;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 9pt;
+    line-height: 1.5;
+    color: #000;
+    background: white;
+}
+
+.print-header {
+    border-bottom: 3px solid #000;
+    padding-bottom: 12pt;
+    margin-bottom: 16pt;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.header-left h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24pt;
+    font-weight: 800;
+    margin-bottom: 4pt;
+    line-height: 1.1;
+}
+
+.header-left .subtitle {
+    font-size: 11pt;
+    color: #333;
+    margin-bottom: 6pt;
+}
+
+.header-meta {
+    display: flex;
+    gap: 16pt;
+    font-size: 8pt;
+    color: #555;
+}
+
+.header-right {
+    text-align: right;
+}
+
+.kit-badge {
+    display: inline-block;
+    padding: 6pt 12pt;
+    background: #000;
+    color: white;
+    font-weight: 700;
+    font-size: 14pt;
+    margin-bottom: 6pt;
+}
+
+.goal-box {
+    background: #f9f9f9;
+    border: 2px solid #000;
+    padding: 10pt;
+    margin-bottom: 16pt;
+}
+
+.goal-box h2 {
+    font-size: 11pt;
+    font-weight: 700;
+    margin-bottom: 4pt;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.materials-section {
+    margin-bottom: 16pt;
+}
+
+.section-title {
+    font-size: 12pt;
+    font-weight: 700;
+    margin-bottom: 8pt;
+    padding-bottom: 3pt;
+    border-bottom: 1.5px solid #000;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.materials-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6pt;
+}
+
+.material-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 6pt 8pt;
+    background: #f9f9f9;
+    border: 1px solid #ccc;
+}
+
+.material-color {
+    font-weight: 500;
+}
+
+.material-spec {
+    color: #333;
+    font-size: 8pt;
+}
+
+.steps-section {
+    margin-bottom: 16pt;
+}
+
+.step {
+    margin-bottom: 16pt;
+    page-break-inside: avoid;
+}
+
+.step-header {
+    display: flex;
+    align-items: center;
+    gap: 10pt;
+    margin-bottom: 8pt;
+    padding: 8pt;
+    background: #f0f0f0;
+    border-left: 4px solid #000;
+}
+
+.step-number-circle {
+    width: 28pt;
+    height: 28pt;
+    background: #000;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 12pt;
+    flex-shrink: 0;
+}
+
+.step-header-info {
+    flex: 1;
+}
+
+.step-header-info h3 {
+    font-size: 11pt;
+    font-weight: 700;
+    margin-bottom: 2pt;
+}
+
+.step-header-info .step-time {
+    font-size: 8pt;
+    color: #555;
+}
+
+.step-content {
+    padding-left: 38pt;
+}
+
+.step-instruction {
+    margin-bottom: 8pt;
+    text-align: justify;
+}
+
+.step-tip {
+    background: #fff9e6;
+    border: 1px solid #d97706;
+    padding: 8pt;
+    margin-top: 8pt;
+    font-size: 8pt;
+}
+
+.step-tip strong {
+    color: #92400e;
+}
+
+.diagram-placeholder {
+    width: 100%;
+    height: 120pt;
+    border: 2px dashed #999;
+    margin: 10pt 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fafafa;
+    color: #666;
+    font-size: 8pt;
+    text-align: center;
+}
+
+.checkbox-row {
+    display: flex;
+    gap: 12pt;
+    margin-top: 10pt;
+    flex-wrap: wrap;
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    gap: 6pt;
+    font-size: 8pt;
+}
+
+.checkbox-box {
+    width: 12pt;
+    height: 12pt;
+    border: 1.5px solid #000;
+}
+
+.footer {
+    margin-top: 24pt;
+    padding-top: 12pt;
+    border-top: 1.5px solid #ccc;
+    text-align: center;
+    font-size: 7pt;
+    color: #666;
+}
+
+@media print {
+    body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+    
+    .no-print {
+        display: none !important;
+    }
+}
