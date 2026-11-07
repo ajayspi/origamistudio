@@ -1,6 +1,7 @@
 <div align="center">
 
 # Project O2
+![build](https://github.com/ajayspi/origamistudio/actions/workflows/build.yml/badge.svg)
 
 ### Computational Origami & Compliant 3D Kinematics Studio
 
